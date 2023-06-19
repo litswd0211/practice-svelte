@@ -12,6 +12,18 @@
     imgpath: "https://picsum.photos/200/300",
     text: "text",
   };
+
+  function alertToggle() {
+    alert(`click Svelte Event`);
+  }
+
+  function consoleTogge() {
+    console.log(`once click Svengte Event`);
+  }
 </script>
 
 <Child {text} {html} {arr} {obj} />
+
+<button on:click={alertToggle} on:click|once={consoleTogge}>multi toggle</button
+>
+<button on:click|once={alertToggle} on:click={consoleTogge}>once toggle</button>
