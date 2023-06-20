@@ -1,6 +1,7 @@
 <script>
   import Child from "$lib/components/Child.svelte";
   import DispatcherChild from "$lib/components/DispatcherChild.svelte";
+  import { bind } from "svelte/internal";
 
   let text = "text,txt";
   let html = "1<br>2<br>3";
@@ -38,6 +39,14 @@
   function increment() {
     count += 1;
   }
+
+  let name = "";
+
+  let selectedFruit = "";
+  let selectedFruits = [];
+  let fruits = ["apple", "orange", "banana"];
+
+  let myElement;
 </script>
 
 <Child {text} {html} {arr} {obj} />
@@ -52,3 +61,27 @@
 
 <p>Count: {count}</p>
 <p>Double: {doubled}</p>
+
+<input type="text" bind:value={name} />
+<p>Hello, {name}!</p>
+
+<select bind:value={selectedFruit}>
+  {#each fruits as fruit}
+    <option>{fruit}</option>
+  {/each}
+</select>
+
+<p>You selected: {selectedFruit || "nothing"}</p>
+
+{#each fruits as fruit}
+  <label>
+    <input type="checkbox" bind:group={selectedFruits} value={fruit} />
+    {fruit}
+  </label>
+{/each}
+
+<p>Selected fruits: {selectedFruits.join(", ") || "none"}</p>
+
+<div bind:this={myElement}>Hello, Svelte!</div>
+
+<button on:click={() => console.log(myElement)}>Log Dom element</button>
