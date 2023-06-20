@@ -1,5 +1,6 @@
 <script>
   import Child from "$lib/components/Child.svelte";
+  import DispatcherChild from "$lib/components/DispatcherChild.svelte";
 
   let text = "text,txt";
   let html = "1<br>2<br>3";
@@ -20,6 +21,10 @@
   function consoleTogge() {
     console.log(`once click Svengte Event`);
   }
+
+  function handleCustomEvent(event) {
+    console.log(event.detail.data);
+  }
 </script>
 
 <Child {text} {html} {arr} {obj} />
@@ -27,3 +32,5 @@
 <button on:click={alertToggle} on:click|once={consoleTogge}>multi toggle</button
 >
 <button on:click|once={alertToggle} on:click={consoleTogge}>once toggle</button>
+
+<DispatcherChild on:myevent={handleCustomEvent} />
