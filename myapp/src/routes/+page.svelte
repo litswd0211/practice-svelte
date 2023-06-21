@@ -27,19 +27,6 @@
     console.log(event.detail.data);
   }
 
-  let count = 0;
-  let doubled;
-
-  $: doubled = count * 2;
-
-  $: if (count >= 5) {
-    console.log("Count is 5 or greater");
-  }
-
-  function increment() {
-    count += 1;
-  }
-
   let name = "";
 
   let selectedFruit = "";
@@ -47,6 +34,8 @@
   let fruits = ["apple", "orange", "banana"];
 
   let myElement;
+
+  import { derCount, derDoubled } from "../store.js";
 </script>
 
 <Child {text} {html} {arr} {obj} />
@@ -56,11 +45,6 @@
 <button on:click|once={alertToggle} on:click={consoleTogge}>once toggle</button>
 
 <DispatcherChild on:myevent={handleCustomEvent} />
-
-<button on:click={increment}>Increment</button>
-
-<p>Count: {count}</p>
-<p>Double: {doubled}</p>
 
 <input type="text" bind:value={name} />
 <p>Hello, {name}!</p>
@@ -85,3 +69,6 @@
 <div bind:this={myElement}>Hello, Svelte!</div>
 
 <button on:click={() => console.log(myElement)}>Log Dom element</button>
+
+<p>Count: {$derCount}</p>
+<p>Double Count: {$derDoubled}</p>
